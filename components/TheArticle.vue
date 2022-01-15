@@ -1,6 +1,16 @@
 <template>
-  <v-card class="mx-auto" min-height="150" elevation="7" max-width="350">
-    <img :src="article.preview_image" alt="" />
+  <v-card
+    class="mx-auto container-card"
+    min-height="344"
+    elevation="7"
+    max-width="350"
+  >
+    <v-img
+      class="preview"
+      :src="article.preview_image"
+      width="200"
+      height="200"
+    />
     <!-- ТУТ НАДО СДЕЛАТЬ ПУТЬ К КАРТИНКЕ -->
     <v-card-text>
       <div class="text--primary">
@@ -33,5 +43,11 @@ export default {
   opacity: 1 !important;
   position: absolute;
   width: 100%;
+}
+.preview {
+  margin: 3px auto;
+}
+.container-card {
+  padding-top: 10px;
 }
 </style>

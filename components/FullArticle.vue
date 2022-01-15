@@ -13,11 +13,17 @@
     </v-sheet>
     <div v-else>
       <h1>{{ article.name }}</h1>
+      <v-img
+        class="image"
+        max-height="500"
+        :src="'/' + article.full_image"
+      ></v-img>
       <p>{{ article.desc }}</p>
       <p>
         <em>{{ article.date }}</em>
       </p>
     </div>
+    <!-- ГЫГЫК инпуты для комментариев -->
     <v-row class="comment-row" v-for="comment in comments" :key="comment.id">
       <TheComment :comment="comment" />
     </v-row>
@@ -61,5 +67,8 @@ export default {
 <style>
 .comment-row {
   margin: 10px;
+}
+.image {
+  margin: 20px 0;
 }
 </style>
