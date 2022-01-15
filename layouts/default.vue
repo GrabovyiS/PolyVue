@@ -1,123 +1,73 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <nav>
+      <img
+        src="https://png2.cleanpng.com/sh/e0c3d5f8d46775e699cd4a30d22ff30e/L0KzQYm3UsA1N5Jsj5H0aYP2gLBuTf1ia5pzjNH8aD3wcbS0jCMugF5xgdH3LX3kc7F6Tf1ia5N0h902b4DogrL7if5oNaRARdN5cHzoPb32hB8uPZI8T9MCNkK2R4i6VcMvPmE8TKI8NEO0RYKAV8kyOGg5SqQCMT7zfri=/kisspng-macintosh-mac-os-x-lion-macos-macbook-operating-sy-apple-logo-5a77a762377353.6074034315177910742271.png"
+        alt=""
+        id="logo"
+      />
+      <div id="links">
+        <NuxtLink to="/"> Главная </NuxtLink>
+        <NuxtLink to="/articles"> Статьи </NuxtLink>
+        <NuxtLink to="/gallery"> Галерея </NuxtLink>
+      </div>
+      <div id="input-container">
+        <v-text-field label="Поиск" prepend-icon="mdi-magnify"></v-text-field>
+      </div>
+    </nav>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'DefaultLayout',
-  data () {
+  name: "DefaultLayout",
+  data() {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Articles',
-          to: '/articles',
-        }
-      ],
+
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
-}
+      title: "Vuetify.js",
+    };
+  },
+};
 </script>
+
+<style>
+nav {
+  margin: 0 0 40px 0;
+  padding: 10px 30px 10px 10px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+}
+#input-container {
+  min-width: 250px;
+  padding: 10px;
+}
+#links {
+  width: 210px;
+  display: flex;
+  justify-content: space-between;
+}
+#links > a {
+  color: white;
+  text-decoration: none;
+}
+</style>

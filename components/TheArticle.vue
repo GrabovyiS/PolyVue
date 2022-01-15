@@ -1,8 +1,8 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
+  <v-card class="mx-auto" min-height="150" elevation="7" max-width="350">
+    <img :src="article.preview_image" alt="" />
+    <!-- ТУТ НАДО СДЕЛАТЬ ПУТЬ К КАРТИНКЕ -->
     <v-card-text>
-      <div>СТАТЬЯ)</div>
-      <p class="text-h4 text--primary">{{ article.name }}</p>
       <div class="text--primary">
         {{ article.shortDesc }}
       </div>
@@ -13,7 +13,7 @@
         text
         color="teal accent-4"
       >
-        Перейти)
+        Перейти
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "InspirePage",
+  name: "ArticlesPage",
   data() {
     return {
       articles: [],
@@ -25,7 +25,6 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.articles = data;
-        console.log(this.articles);
       })
       .catch((error) => console.log(error));
   },
