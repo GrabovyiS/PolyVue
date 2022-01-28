@@ -23,6 +23,13 @@
         <em>{{ article.date }}</em>
       </p>
     </div>
+    <form id="form" @submit.prevent="send">
+      <text-input @textinput="setUserName" :label="'Имя'" />
+      <text-input @textinput="setUserComment" :label="'Комментарий'" />
+      <v-btn type="submit" elevation="2" outlined>Отправить комментарий</v-btn>
+    </form>
+    Форма добавления комментария содержит вложенные компоненты text-input и
+    должна осуществлять обмен данными между ними (при помощи v-model и $emit)
     <!-- ГЫГЫК инпуты для комментариев -->
     <v-row class="comment-row" v-for="comment in comments" :key="comment.id">
       <TheComment :comment="comment" />
@@ -37,10 +44,41 @@ export default {
       article: null,
       isLoading: null,
       comments: null,
+      userName: null,
+      userComment: null,
       theme: {
         default: { isDark: false },
       },
     };
+  },
+  methods: {
+    setUserName(prop) {
+      this.userName = prop;
+    },
+    setUserComment(prop) {
+      this.userComment = prop;
+    },
+    send() {
+      const sentTime = Date.now();
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_name: this.userName,
+          comment: this.userComment,
+        }),
+      };
+      fetch(
+        `http://demo-api.vsdev.space/api/articles/${this.$route.params.id}/comments`,
+        requestOptions
+      );
+      this.comments.push({
+        created_at: sentTime,
+        user_name: this.userName,
+        comment: this.userComment,
+        id: sentTime,
+      });
+    },
   },
   created() {
     this.isLoading = true;
